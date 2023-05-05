@@ -63,6 +63,7 @@ export const StyledSearchInput = styled.input`
   outline: none;
   padding-left: 15px;
   padding-right: 15px;
+  color: #8d92a8;
 
   ::placeholder {
     font: inherit;
