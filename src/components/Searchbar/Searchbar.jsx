@@ -1,3 +1,4 @@
+import { Component } from 'react';
 import {
   StyledSearchbar,
   StyledSearchForm,
@@ -6,20 +7,49 @@ import {
   StyledSearchIcon,
 } from './Searchbar.styled';
 
-export const Searchbar = () => {
-  return (
-    <StyledSearchbar>
-      <StyledSearchForm>
-        <StyledSearchInput
-          type="text"
-          autocomplete="off"
-          autofocus
-          placeholder="Search images and photos"
-        />
-        <StyledSearchBtn type="submit">
-          <StyledSearchIcon />
-        </StyledSearchBtn>
-      </StyledSearchForm>
-    </StyledSearchbar>
-  );
-};
+export class Searchbar extends Component {
+  state = {
+    searchQuery: '',
+  };
+
+  // контрольований інпут
+  handleInputChange = e => {
+    // this.setState({ searchQuery: e.currentTarget.value });
+    const { name, value } = e.currentTarget;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  reset = () => {
+    this.setState({ searchQuery: '' });
+  };
+
+  handleFormSubmit = e => {
+    e.preventDefault();
+
+    this.props.onSubmit(this.state.searchQuery);
+    this.reset();
+  };
+
+  render() {
+    return (
+      <StyledSearchbar>
+        <StyledSearchForm onSubmit={this.handleFormSubmit}>
+          <StyledSearchInput
+            type="text"
+            autoComplete="off"
+            name="searchQuery"
+            autoFocus
+            placeholder="Search images and photos"
+            value={this.state.searchQuery}
+            onChange={this.handleInputChange}
+          />
+          <StyledSearchBtn type="submit">
+            <StyledSearchIcon />
+          </StyledSearchBtn>
+        </StyledSearchForm>
+      </StyledSearchbar>
+    );
+  }
+}
