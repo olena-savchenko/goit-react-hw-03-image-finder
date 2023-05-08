@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { getImages } from 'api/pixabay-api';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { StyledApp } from './App.styled';
 // import { ToastContainer } from 'react-toastify';
 
 export class App extends Component {
@@ -35,10 +36,10 @@ export class App extends Component {
 
   render() {
     return (
-      <>
+      <StyledApp>
         <Searchbar handleSearch={this.handleSearch} />
         <ImageGallery images={this.state.images} />
-      </>
+      </StyledApp>
     );
   }
 }
