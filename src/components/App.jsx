@@ -1,21 +1,44 @@
 import { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
+import { getImages } from 'api/pixabay-api';
+import { ImageGallery } from './ImageGallery/ImageGallery';
+// import { ToastContainer } from 'react-toastify';
 
 export class App extends Component {
   state = {
-    searchName: '',
+    searchQuery: '',
+    images: [],
   };
 
-  handleSearchQuery = searchName => {
-    console.log('Імя для пошуку в App: ', searchName);
-    this.setState({ searchName });
+  handleSearch = searchQuery => {
+    this.setState({ searchQuery });
   };
 
-  componentDidMount() {
-    // тут треба робити http запити
+  async componentDidUpdate(prevProps, prevState) {
+    // getImages(this.state.searchQuery).then(response => {
+    //   return this.setState(prevState => {images: [...prevState.images, ...response.data})
+    // });
+    if (prevState.searchQuery !== this.state.searchQuery) {
+      // getImages(this.state.searchQuery).then(response =>
+      //   console.log(response.data.hits)
+      const images = await getImages(this.state.searchQuery);
+      console.log('Images from axios: ', images);
+
+      this.setState({ images });
+      // this.setState(prevState => {images}); // console.log('Images в APP: ', images);
+    }
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+
+  // }
+
   render() {
-    return <Searchbar onSubmit={this.handleSearchQuery} />;
+    return (
+      <>
+        <Searchbar handleSearch={this.handleSearch} />
+        <ImageGallery images={this.state.images} />
+      </>
+    );
   }
 }

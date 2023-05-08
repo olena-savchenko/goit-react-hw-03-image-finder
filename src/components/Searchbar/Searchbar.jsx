@@ -6,6 +6,7 @@ import {
   StyledSearchInput,
   StyledSearchIcon,
 } from './Searchbar.styled';
+// import { toast } from 'react-toastify';
 
 export class Searchbar extends Component {
   state = {
@@ -28,7 +29,13 @@ export class Searchbar extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit(this.state.searchQuery);
+    //заборона вводу порожнього рядка
+    if (this.state.searchQuery.trim() === '') {
+      alert('Введіть пошуковий запит!');
+      return;
+    }
+
+    this.props.handleSearch(this.state.searchQuery);
     this.reset();
   };
 
