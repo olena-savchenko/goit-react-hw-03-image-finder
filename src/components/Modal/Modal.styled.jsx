@@ -14,9 +14,6 @@ export const StyledOverlay = styled.div`
 `;
 
 export const StyledModal = styled.div`
-  /* max-width: calc(100vw - 48px);
-  max-height: calc(100vh - 24px); */
-  width: 300px;
-  height: 300px;
-  background-color: aliceblue;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 24px);
 `;

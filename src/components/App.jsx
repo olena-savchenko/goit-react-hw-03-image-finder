@@ -11,15 +11,20 @@ export class App extends Component {
     searchQuery: '',
     images: [],
     showModal: false,
-    // largeImageURL: '',
   };
 
+  // передаємо значення пошукового запиту при сабміті форму з класу Searchbar в state App
   handleSearch = searchQuery => {
     this.setState({ searchQuery });
   };
 
-  toggleModal = () => {
-    this.setState(prevState => ({ showModal: !prevState.showModal }));
+  // міняє значення showModal в state на протилежне
+  toggleModal = (largeImageURL, alt) => {
+    this.setState(prevState => ({
+      showModal: !prevState.showModal,
+      largeImageURL,
+      alt,
+    }));
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -30,15 +35,21 @@ export class App extends Component {
   }
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, images, largeImageURL, alt } = this.state;
     return (
       <StyledApp>
-        <button type="button" onClick={this.toggleModal}>
-          Открыть
-        </button>
-        {showModal && <Modal onCloseModal={this.toggleModal}>{}</Modal>}
         <Searchbar handleSearch={this.handleSearch} />
-        <ImageGallery images={this.state.images} />
+        <ImageGallery
+          images={images}
+          // передача як props посилання на функцію відкриття/закриття модалки
+          toggleModal={this.toggleModal}
+        />
+        {/* рендер модалки по умові */}
+        {showModal && (
+          <Modal onCloseModal={this.toggleModal}>
+            {<img src={largeImageURL} alt={alt} />}
+          </Modal>
+        )}
       </StyledApp>
     );
   }
