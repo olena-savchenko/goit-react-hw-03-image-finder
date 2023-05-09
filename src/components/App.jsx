@@ -5,6 +5,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { StyledApp } from './App.styled';
 import { Modal } from './Modal/Modal';
 import { LoadMoreBtn } from './Button/Button';
+import { Loader } from './Loader/Loader';
 // import { ToastContainer } from 'react-toastify';
 
 export class App extends Component {
@@ -47,6 +48,7 @@ export class App extends Component {
           toggleModal={this.toggleModal}
         />
         <LoadMoreBtn>load more</LoadMoreBtn>
+        <Loader />
         {/* рендер модалки по умові */}
         {showModal && (
           <Modal onCloseModal={this.toggleModal}>
