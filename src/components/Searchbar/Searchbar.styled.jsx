@@ -17,7 +17,7 @@ export const StyledSearchbar = styled.header`
   color: #fff;
   /* background-color: #3f51b5; */
 
-  background: rgb(196, 218, 220);
+  /* background-color: rgb(196, 218, 220); */
   background: radial-gradient(
     circle,
     rgba(196, 218, 220, 1) 19%,

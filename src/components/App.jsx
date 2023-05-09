@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
-import { getImages } from 'api/pixabay-api';
+import { getImages } from 'service/api';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { StyledApp } from './App.styled';
 import { Modal } from './Modal/Modal';
+import { LoadMoreBtn } from './Button/Button';
 // import { ToastContainer } from 'react-toastify';
 
 export class App extends Component {
@@ -36,6 +37,7 @@ export class App extends Component {
 
   render() {
     const { showModal, images, largeImageURL, alt } = this.state;
+
     return (
       <StyledApp>
         <Searchbar handleSearch={this.handleSearch} />
@@ -44,6 +46,7 @@ export class App extends Component {
           // передача як props посилання на функцію відкриття/закриття модалки
           toggleModal={this.toggleModal}
         />
+        <LoadMoreBtn>load more</LoadMoreBtn>
         {/* рендер модалки по умові */}
         {showModal && (
           <Modal onCloseModal={this.toggleModal}>

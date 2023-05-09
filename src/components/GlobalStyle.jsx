@@ -63,14 +63,7 @@ img {
 }
 `;
 
-/**
-Стилі компонента App
-
-
- 
-
-
-* Стили компонента Buton (Load more)
+/*
 
 .Button {
   padding: 8px 16px;
