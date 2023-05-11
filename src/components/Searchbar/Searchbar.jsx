@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   StyledSearchbar,
   StyledSearchForm,
@@ -6,10 +8,6 @@ import {
   StyledSearchInput,
   StyledSearchIcon,
 } from './Searchbar.styled';
-import toast, { Toaster } from 'react-hot-toast';
-
-// import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
-// import { toast } from 'react-toastify';
 
 export class Searchbar extends Component {
   state = {
@@ -34,10 +32,8 @@ export class Searchbar extends Component {
 
     //заборона вводу порожнього рядка
     if (this.state.searchQuery.trim() === '') {
-      toast('Enter a search name!');
-      // this.setState({
-      //   error: 'Enter a search name!',
-      // });
+      toast.info('Enter a search name!');
+      return;
     }
 
     this.props.handleSearch(this.state.searchQuery.trim());
@@ -46,25 +42,22 @@ export class Searchbar extends Component {
 
   render() {
     return (
-      <>
-        <Toaster position="top-center" reverseOrder={false} />
-        <StyledSearchbar>
-          <StyledSearchForm onSubmit={this.handleFormSubmit}>
-            <StyledSearchInput
-              type="text"
-              autoComplete="off"
-              name="searchQuery"
-              autoFocus
-              placeholder="Search images and photos"
-              value={this.state.searchQuery}
-              onChange={this.handleInputChange}
-            />
-            <StyledSearchBtn type="submit">
-              <StyledSearchIcon />
-            </StyledSearchBtn>
-          </StyledSearchForm>
-        </StyledSearchbar>
-      </>
+      <StyledSearchbar>
+        <StyledSearchForm onSubmit={this.handleFormSubmit}>
+          <StyledSearchInput
+            type="text"
+            autoComplete="off"
+            name="searchQuery"
+            autoFocus
+            placeholder="Search images and photos"
+            value={this.state.searchQuery}
+            onChange={this.handleInputChange}
+          />
+          <StyledSearchBtn type="submit">
+            <StyledSearchIcon />
+          </StyledSearchBtn>
+        </StyledSearchForm>
+      </StyledSearchbar>
     );
   }
 }

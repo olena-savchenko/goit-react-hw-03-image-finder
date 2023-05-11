@@ -14,7 +14,3 @@ export const ImageGalleryItem = ({ image, toggleModal }) => {
     </StyledImageGalleryItem>
   );
 };
-
-// ImageGalleryItem.propTypes = {
-//   image: PropTypes.
-// }
