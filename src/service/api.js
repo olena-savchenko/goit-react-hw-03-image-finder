@@ -17,7 +17,7 @@ import axios from 'axios';
 //   return axios.get(url, options);
 // }
 
-export const getImages = async value => {
+export const getImages = async (value, page) => {
   const url = 'https://pixabay.com/api/';
   const options = {
     params: {
@@ -26,16 +26,18 @@ export const getImages = async value => {
       image_type: 'photo',
       orientation: 'horizontal',
       per_page: 12,
-      page: 1,
+      page: page,
     },
   };
 
-  try {
-    const response = await axios.get(url, options);
-    // console.log('Response в Api: ', response);
-    // console.log('Response.data в api: ', response.data);
-    return response.data.hits;
-  } catch (error) {
-    console.log(error);
-  }
+  const response = await axios.get(url, options);
+  return response.data;
+  // try {
+  //   const response = await axios.get(url, options);
+  //   // console.log('Response в Api: ', response);
+  //   // console.log('Response.data в api: ', response.data);
+  //   return response.data.hits;
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };

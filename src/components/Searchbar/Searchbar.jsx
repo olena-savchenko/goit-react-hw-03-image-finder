@@ -6,6 +6,9 @@ import {
   StyledSearchInput,
   StyledSearchIcon,
 } from './Searchbar.styled';
+import toast, { Toaster } from 'react-hot-toast';
+
+// import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 // import { toast } from 'react-toastify';
 
 export class Searchbar extends Component {
@@ -31,32 +34,37 @@ export class Searchbar extends Component {
 
     //заборона вводу порожнього рядка
     if (this.state.searchQuery.trim() === '') {
-      alert('Введіть пошуковий запит!');
-      return;
+      toast('Enter a search name!');
+      // this.setState({
+      //   error: 'Enter a search name!',
+      // });
     }
 
-    this.props.handleSearch(this.state.searchQuery);
+    this.props.handleSearch(this.state.searchQuery.trim());
     this.reset();
   };
 
   render() {
     return (
-      <StyledSearchbar>
-        <StyledSearchForm onSubmit={this.handleFormSubmit}>
-          <StyledSearchInput
-            type="text"
-            autoComplete="off"
-            name="searchQuery"
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.searchQuery}
-            onChange={this.handleInputChange}
-          />
-          <StyledSearchBtn type="submit">
-            <StyledSearchIcon />
-          </StyledSearchBtn>
-        </StyledSearchForm>
-      </StyledSearchbar>
+      <>
+        <Toaster position="top-center" reverseOrder={false} />
+        <StyledSearchbar>
+          <StyledSearchForm onSubmit={this.handleFormSubmit}>
+            <StyledSearchInput
+              type="text"
+              autoComplete="off"
+              name="searchQuery"
+              autoFocus
+              placeholder="Search images and photos"
+              value={this.state.searchQuery}
+              onChange={this.handleInputChange}
+            />
+            <StyledSearchBtn type="submit">
+              <StyledSearchIcon />
+            </StyledSearchBtn>
+          </StyledSearchForm>
+        </StyledSearchbar>
+      </>
     );
   }
 }

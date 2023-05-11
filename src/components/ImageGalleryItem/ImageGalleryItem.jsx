@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { StyledImage, StyledImageGalleryItem } from './ImageGalleryItem.styled';
 
 export const ImageGalleryItem = ({ image, toggleModal }) => {
