@@ -34,7 +34,6 @@ export class App extends Component {
         // запит на pixabay-api
         const data = await getImages(searchQuery, page);
         const images = data.hits;
-        console.log(data);
 
         if (images.length === 0) {
           return toast.info(WARNING_MSG);
@@ -76,7 +75,6 @@ export class App extends Component {
 
   // викликається при натисканні кнопки "Load more".
   onClickLoadMore = () => {
-    console.log('Click Load More');
     this.setState(prevState => ({
       page: prevState.page + 1,
     }));
@@ -85,13 +83,14 @@ export class App extends Component {
   render() {
     const { showModal, images, largeImageURL, alt, loading, total, page } =
       this.state;
-
     const isLoadMore = total / 12 > page;
 
     return (
       <StyledApp>
         {/* serchForm */}
         <Searchbar handleSearch={this.handleSearch} />
+
+        {/* Контейнер для повідомлень про помилку запиту */}
         <ToastContainer autoClose={3000} transition={Flip} position="right" />
 
         {/* Loader */}

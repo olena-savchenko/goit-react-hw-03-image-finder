@@ -6,24 +6,20 @@ import { Component } from 'react';
 
 export class Modal extends Component {
   componentDidMount() {
-    // console.log('componentDidMount');
     window.addEventListener('keydown', this.onKeyDown);
   }
   componentWillUnmount() {
-    // console.log('componentWillUnmount');
     window.removeEventListener('keydown', this.onKeyDown);
   }
 
   onKeyDown = e => {
     if (e.code === `Escape`) {
-      // console.log('Натискання ESC');
       this.props.onCloseModal();
     }
   };
 
   onClickOverlay = e => {
     if (e.currentTarget === e.target) {
-      // console.log('Клік по оверлей');
       this.props.onCloseModal();
     }
   };

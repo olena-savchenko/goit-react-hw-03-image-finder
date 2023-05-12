@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { StyledImageGallery } from './ImageGallery.styled';
 
@@ -14,4 +15,13 @@ export const ImageGallery = ({ images, toggleModal }) => {
       ))}
     </StyledImageGallery>
   );
+};
+
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    })
+  ),
+  toggleModal: PropTypes.func.isRequired,
 };

@@ -16,7 +16,6 @@ export class Searchbar extends Component {
 
   // контрольований інпут
   handleInputChange = e => {
-    // this.setState({ searchQuery: e.currentTarget.value });
     const { name, value } = e.currentTarget;
     this.setState({
       [name]: value,
