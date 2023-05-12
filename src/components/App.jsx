@@ -4,7 +4,7 @@ import { getImages } from 'service/api';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { StyledApp } from './App.styled';
 import { Modal } from './Modal/Modal';
-import { LoadMoreBtn } from './Button/Button';
+import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { StyledLoader } from './Loader/Loader.styled';
 import { toast, ToastContainer, Flip } from 'react-toastify';
@@ -53,14 +53,14 @@ export class App extends Component {
   }
 
   // передаємо значення пошукового запиту при сабміті форми з класу Searchbar в state App,
+  // якщо попередній і новий запит не співпадають,
   // для кожного нового запиту очищується масив картинок, page=1
+
   handleSearch = searchQuery => {
-    this.setState({
-      searchQuery,
-      images: [],
-      page: 1,
-      total: 0,
-      loading: false,
+    this.setState(prevState => {
+      if (prevState.searchQuery !== searchQuery) {
+        return { searchQuery, images: [], page: 1, total: 0, loading: false };
+      }
     });
   };
 
@@ -105,15 +105,13 @@ export class App extends Component {
 
         {/* LoadMore button */}
         {isLoadMore && (
-          <LoadMoreBtn onClickLoadMore={this.onClickLoadMore}>
-            load more
-          </LoadMoreBtn>
+          <Button onClickLoadMore={this.onClickLoadMore}>load more</Button>
         )}
 
         {/* рендер модалки по умові */}
         {showModal && (
           <Modal onCloseModal={this.toggleModal}>
-            {<img src={largeImageURL} alt={alt} />}
+            {<img src={largeImageURL} alt={alt} loading="lazy" />}
           </Modal>
         )}
       </StyledApp>
