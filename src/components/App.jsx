@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const WARNING_MSG = 'Sorry, there are no images matching your search query';
 const ERROR_MSG = 'Something was wrong, please try again!';
+const INFO_MSG =
+  'You just entered this search name. Click the "LoadMore" button below';
 
 export class App extends Component {
   state = {
@@ -58,9 +60,19 @@ export class App extends Component {
 
   handleSearch = searchQuery => {
     this.setState(prevState => {
-      if (prevState.searchQuery !== searchQuery) {
-        return { searchQuery, images: [], page: 1, total: 0, loading: false };
+      // if (prevState.searchQuery !== searchQuery) {
+      //   return { searchQuery, images: [], page: 1, total: 0, loading: false };
+      // } else {
+      //   toast.info(INFO_MSG);
+      // }
+
+      if (prevState.searchQuery === searchQuery) {
+        toast.info(INFO_MSG);
+        console.log('Повторний ввод пошукового слова');
+        return;
       }
+
+      return { searchQuery, images: [], page: 1, total: 0, loading: false };
     });
   };
 
